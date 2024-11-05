@@ -50,7 +50,7 @@ public class RoomMeshScanner : MonoBehaviour
     {
         if (isRoomEstablished) return; // Stop updating room bounds if room is established
 
-        allWorldVertices.Clear(); // Clear existing vertices
+        //allWorldVertices.Clear(); // Clear existing vertices
 
         foreach (var mesh in args.added)
         {
