@@ -14,12 +14,14 @@ public class RoomMeshScanner : MonoBehaviour
     public TextMeshProUGUI roomCenterText;
     public TextMeshProUGUI cameraPositionText;
     public Button confirmRoomButton; // Button to confirm room establishment
+    public Button toggleMeshDisplay;
 
     // UnityEvent that other scripts can listen to
     public UnityEvent OnRoomConfirmed;
 
     // List to store all accumulated vertices in world space
     private List<Vector3> allWorldVertices = new List<Vector3>();
+    private List<MeshRenderer> meshRenderers = new List<MeshRenderer>();
 
     // Min and Max bounds for the room
     private Vector3 roomMinBound = Vector3.positiveInfinity;
@@ -28,7 +30,7 @@ public class RoomMeshScanner : MonoBehaviour
 
     // Flag to check if room is established
     private bool isRoomEstablished = false;
-
+    private bool isMeshVisible = true;
     void Start()
     {
         meshManager = GetComponent<ARMeshManager>();
@@ -43,11 +45,13 @@ public class RoomMeshScanner : MonoBehaviour
 
         // Attach the confirm button to the ConfirmRoom method
         confirmRoomButton.onClick.AddListener(ConfirmRoom);
+        toggleMeshDisplay.onClick.AddListener(ToggleMeshDisplay);
     }
 
     // Called whenever meshes are updated
     void OnMeshesChanged(ARMeshesChangedEventArgs args)
     {
+
         if (isRoomEstablished) return; // Stop updating room bounds if room is established
 
         //allWorldVertices.Clear(); // Clear existing vertices
@@ -55,9 +59,13 @@ public class RoomMeshScanner : MonoBehaviour
         foreach (var mesh in args.added)
         {
             MeshFilter meshFilter = mesh.GetComponent<MeshFilter>();
+            MeshRenderer renderer = mesh.GetComponent<MeshRenderer>();
 
-            if (meshFilter != null)
+            if (meshFilter != null && renderer != null)
             {
+                // store mesh render to list
+                meshRenderers.Add(renderer);
+
                 Mesh unityMesh = meshFilter.mesh;
                 Vector3[] vertices = unityMesh.vertices;
 
@@ -70,6 +78,7 @@ public class RoomMeshScanner : MonoBehaviour
             }
         }
 
+        
         UpdateRoomBounds(); // Update bounds with the latest vertices
     }
 
@@ -100,8 +109,9 @@ public class RoomMeshScanner : MonoBehaviour
         isRoomEstablished = true;
         Debug.Log("Room has been established.");
 
-        // Trigger the OnRoomConfirmed event
-        OnRoomConfirmed?.Invoke();
+        meshManager.enabled = false;
+        //// Trigger the OnRoomConfirmed event
+        //OnRoomConfirmed?.Invoke();
     }
 
     // Continuously update the camera's position relative to the fixed room center
@@ -124,6 +134,23 @@ public class RoomMeshScanner : MonoBehaviour
 
         cameraPositionText.text = $"Camera Position: {relativePosition}";
     }
+
+    // Toggle the display of all mesh renderers
+    public void ToggleMeshDisplay()
+    {
+        isMeshVisible = !isMeshVisible; // Toggle visibility state
+
+        foreach (var renderer in meshRenderers)
+        {
+            if (renderer != null)
+            {
+                renderer.enabled = isMeshVisible;
+            }
+        }
+
+        Debug.Log($"Mesh display is now {(isMeshVisible ? "enabled" : "disabled")}");
+    }
+
 
     private void OnDestroy()
     {
