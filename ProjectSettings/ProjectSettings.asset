@@ -140,7 +140,16 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 4800000, guid: b1d4c517492046e1a4e4cc49b0b73b42, type: 3}
+  - {fileID: 4800000, guid: 2b7e3540272684e0b8e12fed2c4609de, type: 3}
+  - {fileID: 4800000, guid: b02d09082cbc14569ae46c12d9836abc, type: 3}
+  - {fileID: 4800000, guid: c9f956787b1d945e7b36e0516201fc76, type: 3}
+  - {fileID: 4800000, guid: 0945859e5a1034c2cb6dce53cb4fb899, type: 3}
+  - {fileID: 1866249383463008231, guid: 0bd186a7e31f45e49850addac778fa17, type: 2}
+  - {fileID: 11400000, guid: 2ffb08a19e4e1f34e9f4109e14f7b5cc, type: 2}
+  - {fileID: -8721230693421502780, guid: 1d8cc38c3da2a4e4bb4555fa7b082511, type: 2}
+  - {fileID: 11400000, guid: b5bc0213b4235ff4a8b1a42f1f6b9e0c, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -160,7 +169,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.DefaultCompany.IndoorLocation
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -168,7 +178,7 @@ PlayerSettings:
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 24
+  AndroidMinSdkVersion: 23
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -835,6 +845,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
+    Android: NIANTIC_LIGHTSHIP_AR_LOADER_ENABLED
     Standalone: NIANTIC_LIGHTSHIP_AR_LOADER_ENABLED;NIANTIC_ARDK_USE_FAST_LIGHTWEIGHT_PAM
     iPhone: UNITY_XR_ARKIT_LOADER_ENABLED
   additionalCompilerArguments: {}

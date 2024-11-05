@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/IndoorPos.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: b5bc0213b4235ff4a8b1a42f1f6b9e0c, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 279df6042466bde48aba82236f9edd50, type: 2}
