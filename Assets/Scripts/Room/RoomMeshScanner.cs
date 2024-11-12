@@ -13,6 +13,7 @@ public class RoomMeshScanner : MonoBehaviour
     public TextMeshProUGUI roomSizeText;
     public TextMeshProUGUI roomCenterText;
     public TextMeshProUGUI cameraPositionText;
+    public TextMeshProUGUI cameraRotationText;
     public Button confirmRoomButton; // Button to confirm room establishment
     public Button toggleMeshDisplay;
 
@@ -119,7 +120,9 @@ public class RoomMeshScanner : MonoBehaviour
     {
         if (isRoomEstablished)
         {
-            CalculateUserPositionInRoom();
+            //CalculateUserPositionInRoom();
+            CalculateUserabsolutePos();
+            CalculateUserabsoluteRot();
         }
     }
 
@@ -134,6 +137,25 @@ public class RoomMeshScanner : MonoBehaviour
 
         cameraPositionText.text = $"Camera Position: {relativePosition}";
     }
+
+    public void CalculateUserabsolutePos()
+    {
+        // Get the camera's world position
+        Vector3 cameraPosition = Camera.main.transform.position;
+
+        
+        cameraPositionText.text = $"Camera Position: {cameraPosition}";
+    }
+
+    public void CalculateUserabsoluteRot()
+    {
+        // Get the camera's world position
+        Vector3 cameraRotation = Camera.main.transform.rotation.eulerAngles;
+
+
+        cameraRotationText.text = $"Camera Rotation: {cameraRotation}";
+    }
+
 
     // Toggle the display of all mesh renderers
     public void ToggleMeshDisplay()
